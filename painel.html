@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Painel de indicadores | KnowFlow</title>
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <script src="/js/tema.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/css/estilo.css">
+</head>
+<body class="carregando">
+<div class="app">
+    <aside class="sidebar" id="kf-sidebar"></aside>
+    <div class="app-main">
+        <header class="topbar" id="kf-topbar"></header>
+
+        <!-- RF13 - painel com indicadores (Gestor e Administrador) -->
+        <main class="conteudo">
+            <div class="cabecalho-pagina">
+                <div>
+                    <h2>Painel de indicadores</h2>
+                    <p class="subtitulo">Escopo: <strong id="escopo">...</strong></p>
+                </div>
+                <div data-perfis="ADMINISTRADOR">
+                    <label class="form-label" for="departamento">Departamento</label>
+                    <select class="form-select" id="departamento"></select>
+                </div>
+            </div>
+
+            <div class="indicadores" id="indicadores"></div>
+
+            <!-- RF22 - relatório de problemas por período e departamento, em PDF -->
+            <section class="painel">
+                <div class="painel-cabecalho"><h3><i class="bi bi-file-earmark-pdf"></i> Relatório de problemas (PDF)</h3></div>
+                <form class="painel-corpo" id="form-relatorio" novalidate>
+                    <div data-erro-geral></div>
+                    <div class="row g-2 align-items-end">
+                        <div class="col-6 col-md-3">
+                            <label class="form-label" for="rel-de">De</label>
+                            <input class="form-control" type="date" id="rel-de" name="de" required>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label class="form-label" for="rel-ate">Até</label>
+                            <input class="form-control" type="date" id="rel-ate" name="ate" required>
+                        </div>
+                        <div class="col-12 col-md-3" data-perfis="ADMINISTRADOR">
+                            <label class="form-label" for="rel-departamento">Departamento</label>
+                            <select class="form-select" id="rel-departamento" name="departamentoId"></select>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <button type="submit" class="botao botao-primario w-100"><i class="bi bi-download"></i> Gerar PDF</button>
+                        </div>
+                    </div>
+                    <p class="linha-secundaria mt-2 mb-0" data-perfis="GESTOR">O relatório traz os problemas do seu departamento.</p>
+                </form>
+            </section>
+
+            <div class="row g-4">
+                <div class="col-12 col-xl-6">
+                    <section class="painel">
+                        <div class="painel-cabecalho"><h3><i class="bi bi-graph-up"></i> Evolução mensal dos registros</h3></div>
+                        <div class="painel-corpo"><div class="grafico-colunas" id="evolucao"></div></div>
+                    </section>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <section class="painel">
+                        <div class="painel-cabecalho"><h3><i class="bi bi-diagram-3"></i> Categorias com mais problemas</h3></div>
+                        <div class="painel-corpo" id="categorias"></div>
+                    </section>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <section class="painel">
+                        <div class="painel-cabecalho">
+                            <h3><i class="bi bi-arrow-repeat"></i> Problemas mais recorrentes</h3>
+                            <span class="dica">registros muito parecidos (50% ou mais)</span>
+                        </div>
+                        <div id="recorrentes"></div>
+                    </section>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <section class="painel">
+                        <div class="painel-cabecalho"><h3><i class="bi bi-tags"></i> Palavras-chave mais usadas</h3></div>
+                        <div class="painel-corpo" id="palavras"></div>
+                    </section>
+                </div>
+                <div class="col-12 col-xl-6">
+                    <section class="painel">
+                        <div class="painel-cabecalho">
+                            <h3><i class="bi bi-hand-thumbs-up"></i> Soluções mais úteis</h3>
+                            <span class="dica">votos "esta solução me ajudou"</span>
+                        </div>
+                        <div id="uteis"></div>
+                    </section>
+                </div>
+                <div class="col-12 col-xl-6" id="bloco-departamentos">
+                    <section class="painel">
+                        <div class="painel-cabecalho"><h3><i class="bi bi-building-exclamation"></i> Problemas abertos por departamento</h3></div>
+                        <div class="painel-corpo" id="departamentos"></div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/painel.js"></script>
+</body>
+</html>
